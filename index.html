@@ -8,7 +8,7 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
         
-        body {
+         body {
             font-family: 'Ubuntu', sans-serif;
             font-weight: 200; /* Use Ubuntu Light */
             margin: 0;
@@ -30,12 +30,16 @@
             justify-content: center;
         }
         header img {
-            height: 250px; /* Increased logo size */
+            height: 150px; /* Increased logo size */
         }
         nav {
-            background: #004080;
+            background: #4b9fbd;
             text-align: center;
             padding: 10px 0;
+            position: sticky;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
         }
         nav a {
             color: white;
@@ -43,6 +47,9 @@
             margin: 0 15px;
             font-size: 18px;
             font-weight: bold;
+        }
+        nav a.active {
+            color: cyan;
         }
         .section h2 {
             color: purple;
@@ -76,8 +83,60 @@
             text-align: center;
             padding: 20px 0;
             margin-top: 20px;
+        }        
+    	.venue-images {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            max-width: 100%;
+        }
+        .venue-images img {
+            width: 48%;
+            height: auto;
+            border-radius: 10px;
+        }
+        .form-container {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: auto;
+        }
+        .form-container input, .form-container textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .form-container button {
+            background: #004080;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            margin-top: 10px;
+            cursor: pointer;
+            border-radius: 5px;
         }
     </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const sections = document.querySelectorAll(".section");
+            const navLinks = document.querySelectorAll("nav a");
+
+            function changeActiveSection() {
+                let index = sections.length;
+                while (--index && window.scrollY + 50 < sections[index].offsetTop) {}
+                
+                navLinks.forEach((link) => link.classList.remove("active"));
+                navLinks[index].classList.add("active");
+            }
+
+            changeActiveSection();
+            window.addEventListener("scroll", changeActiveSection);
+        });
+    </script>
 </head>
 <body>
     <div class="container">
@@ -86,6 +145,7 @@
         </header>
         
         <nav>
+            <a href="#about">About</a>
             <a href="#program">Program</a>
             <a href="#speakers">Invited Speakers</a>
             <a href="#venue">Venue & Travel</a>
@@ -101,17 +161,39 @@
                     <p>The 13th International Conference on Spontaneous Coherence in Excitonic Systems (ICSCE-13) is organized by CNR-NANOTEC in Lecce, Italy, and will take place in Canary Island. This event continues the well-established tradition of gathering researchers focused on quantum collective phenomena in various electronic excitations in solids, along with related effects in other physical systems.</p>
                     <p>With an emphasis on the broad concept of spontaneous coherence, ICSCE-13 will feature a diverse range of topics, including:</p>
                     <ul>
-                        <li>Exciton-polariton condensates, lasers, and lattices</li>
-                        <li>Computation using exciton-polaritons</li>
-                        <li>Exciton-polaritons in emerging material systems (TMDCs, Perovskites, etc.)</li>
-                        <li>Organic exciton-polaritons</li>
-                        <li>Exciton condensation</li>
-                        <li>Cold atom lattices and alternative platforms for quantum simulation</li>
+                        <li>Bose-Einstein condensates of excitons and exciton-polaritons</li>
+                        <li>Advances in the physics of quantum fluids of light and matter</li>
+                        <li>Topological, coherent, and universal in non-equilibrium condensation</li>
+                        <li>Nonlinear dynamics, turbulence, and thermodynamic properties of polaritons</li>
+                        <li>Excitons and exciton-polaritons in novel 2D materials, perovskites, and organic systems</li>
+                        <li>Photonic crystals, metamaterials, and waveguides</li>
+                        <li>Optical, quantum, and neuromorphic computing with light-based systems</li>
+                        <li>Phonon-mediated coupling and impurity effects in excitonic systems</li>
+                        <li>Interactions, transport, and collective phenomena in dipolar and indirect excitons</li>
+                        <li>Alternative platforms, including atomic lattices and quantum simulators</li>
                     </ul>
                     <p>We look forward to welcoming you to Canary Island for an engaging and insightful conference.</p>
+		
+		    <h2>Program Committee</h2>
+                    <ul>
+                        <li>Jacqueline Bloch</li>
+                        <li>Francois Dubin</li>
+                        <li>Alejandro Fainstein</li>
+                        <li>Michal Fraser</li>
+                        <li>Hamid Ohadi</li>
+                        <li>Guillaume Malpuech</li>
+                        <li>Francesca Marchetti</li>
+                        <li>Barbara Pietka</li>
+                        <li>Christian Schneider</li>
+                        <li>Thilo Stöferle</li>
+                        <li>Qihua Xiong</li>
+                    </ul>
+
                 </div>
                 
+                
                 <div class="section" id="program">
+                    
                     <h2>Conference Program</h2>
                     <p>Details on the conference schedule and sessions will be announced soon.</p>
                 </div>
@@ -121,9 +203,15 @@
                     <p>Stay tuned for our distinguished speaker lineup.</p>
                 </div>
                 
-                <div class="section" id="venue">
+ <div class="section" id="venue">
                     <h2>Venue & Travel</h2>
-                    <p>Details on the conference location, accommodation, and travel information will be provided soon.</p>
+                    <p>The ICSCE-13 conference will take place in the stunning Canary Islands, a Spanish archipelago off the northwest coast of Africa. Known for its breathtaking landscapes, volcanic mountains, and beautiful beaches, the Canary Islands offer a unique blend of natural beauty and cultural richness.</p>
+                    <p>Attendees can enjoy the pleasant subtropical climate, explore the diverse ecosystems of the islands, and visit world-renowned sites such as Teide National Park, the sand dunes of Maspalomas, and the vibrant city of Las Palmas.</p>
+                    <div class="venue-images">
+                        <img src="images/canary_islands_1.jpg" alt="Canary Islands Beach">
+                        <img src="images/canary_islands_2.jpg" alt="Teide National Park">
+                    </div>
+                    <p>Travel to the Canary Islands is convenient, with several international airports connecting to major European cities. Local transportation, including ferries and buses, makes island hopping easy, allowing visitors to experience the diverse landscapes and cultural heritage of the region.</p>
                 </div>
                 
                 <div class="section" id="registration">
@@ -131,14 +219,40 @@
                     <p>Information on how to register, fees, and deadlines will be updated soon.</p>
                 </div>
                 
+        <div class="content">
+            <div class="main-content">
                 <div class="section" id="abstract">
                     <h2>Abstract Submission</h2>
-                    <p>Guidelines for abstract submission and deadlines will be announced soon.</p>
+                    <p>Please fill out the form below to submit your abstract.</p>
+                    <div class="form-container">
+                        <form action="submit_form.php" method="post">
+                            <input type="text" name="name" placeholder="Your Name" required>
+                            <input type="email" name="email" placeholder="Your Email" required>
+                            <input type="text" name="title" placeholder="Abstract Title" required>
+                            <textarea name="abstract" placeholder="Your Abstract" rows="5" required></textarea>
+                            <button type="submit">Submit</button>
+                        </form>
+                    </div>
                 </div>
+            </div>
+        </div>
                 
                 <div class="section" id="previous">
                     <h2>Previous Conferences</h2>
-                    <p>Learn about past ICSCE conferences and their impact on the field.</p>
+                    <p>ICSCE is in its 13th edition. Previous meetings were held in North America, Europe, Asia and Australia.</p>
+<li>ICSCE 1 – May 2004, Seven Springs Mountain Resort, PA, USA</li>
+<li>ICSCE 2 – September 2005, Southampton, UK</li>
+<li>ICSCE 3 – January 2007 Center of Physics “Les Houches”, France</li>
+<li>ICSCE 4 – September 2008 Cambridge, United Kingdom</li>
+<li>ICSCE 5 – February 2011 EPFL, Lausanne, Switzerland.</li>
+<li>ICSCE 6 – August 2013 Stanford, CA, USA.</li>
+<li>ICSCE 7 – April 2014 Hakone, Japan</li>
+<li>ICSCE 8 – April 2016 St. Andrews, United Kingdom</li>
+<li>ICSCE 9 – July 2018 Montreal, Canada</li>
+<li>ICSCE 10 – January 2020, Canberra, Australia</li>
+<li>ICSCE 11 – August 2022, Burlington, USA</li>
+<li>ICSCE 12 – June 2024, Dublin, Ireland</li>
+
                 </div>
             </div>
             <aside class="sidebar">
